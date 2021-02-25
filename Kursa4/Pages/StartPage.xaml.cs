@@ -24,6 +24,7 @@ namespace Kursa4.Pages
         protected bool RemoveLastBackEntry;
 
         public ProductsPage? productsPage = null;
+        public OrdersPage? ordersPage = null;
         
         public User CurrentUser {
             get;
@@ -52,7 +53,11 @@ namespace Kursa4.Pages
 
         private void GoToOrdersButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (ordersPage == null)
+            {
+                ordersPage = new OrdersPage();
+            }
+            NavigationService.Navigate(ordersPage);
         }
 
         private void GoToProductsButton_Click(object sender, RoutedEventArgs e)
