@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="879e1e591523494ba5f537c932e09134" Name="Diagram1">
+        <EntityTypeShape EntityType="DataModel.Order" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.OrderMeta" Width="1.5" PointX="7.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.OrderProduct" Width="1.5" PointX="10.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.OrderStatu" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.Product" Width="1.5" PointX="5.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.ProductMeta" Width="1.5" PointX="7.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.User" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.UserMeta" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataModel.UserType" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="DataModel.FK_Order_OrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.FK_Order_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.FK_Order_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.FK_OrderMeta_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.FK_OrderProducts_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.FK_OrderProducts_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.FK_Product_User" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.FK_ProductMeta_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.FK_User_UserType" ManuallyRouted="false" />
+        <AssociationConnector Association="DataModel.FK_UserMeta_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

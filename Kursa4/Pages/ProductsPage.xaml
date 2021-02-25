@@ -1,0 +1,72 @@
+﻿<local:ConcretePage x:Class="Kursa4.Pages.ProductsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Kursa4.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Управление товарами" Loaded="ConcretePage_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Background="{StaticResource BackgroundImageBrush}" Grid.Column="0" Grid.Row="0">
+            <StackPanel Margin="20">
+                <StackPanel>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock>Поиск по наименованию:</TextBlock>
+                        <TextBox x:Name="ProductSearchNameField" Width="200" Margin="15,0,0,0" MaxLength="40" KeyDown="ProductSearchNameField_KeyDown"/>
+                    </StackPanel>
+                    <StackPanel Margin="0,10,0,0">
+                        <DataGrid x:Name="ProductsDataGrid" Height="250" AutoGenerateColumns="False" CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" x:Name="ProductIDColumn" Visibility="Collapsed" Binding="{Binding ID, Mode=TwoWay}"/>
+                                <DataGridTextColumn Header="Наименование" x:Name="ProductNameColumn" Width="2*" Binding="{Binding Name, Mode=TwoWay}"/>
+                                <DataGridTextColumn Header="Артикул" x:Name="ProductSKUColumn" Width="1*" Binding="{Binding SKU, Mode=TwoWay}"/>
+                                <DataGridTextColumn Header="Стоимость" x:Name="ProductPriceColumn" Width="1*" Binding="{Binding Price, Mode=TwoWay}"/>
+                                <DataGridTextColumn Header="Кол-во" x:Name="ProductCountColumn" Width="0.6*" Binding="{Binding Count, Mode=TwoWay}"/>
+                                <DataGridTemplateColumn Header="" x:Name="ProductDeleteColumn" Width="0.8*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Click="DeleteButton_Click">Удалить</Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal" >
+                        <Button Name="SubmitButton" Click="SubmitButton_Click">
+                            <TextBlock Margin="10,0,10,0">
+                                Применить изменения
+                            </TextBlock>
+                        </Button>
+                        <Button Name="CancelButton" Margin="10,0,0,0" Click="CancelButton_Click">
+                            <TextBlock Margin="10,0,10,0">
+                                Отменить изменения
+                            </TextBlock>
+                        </Button>
+                        
+                    </StackPanel>
+                </StackPanel>    
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+            <StackPanel>
+                <Button x:Name="MakeProductButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="MakeProductButton_Click">
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
+                        Создать <LineBreak/> товар
+                    </TextBlock>
+                </Button>
+                
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</local:ConcretePage>

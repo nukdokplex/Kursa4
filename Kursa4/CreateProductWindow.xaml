@@ -1,0 +1,72 @@
+﻿<Window x:Class="Kursa4.CreateProductWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kursa4"
+        mc:Ignorable="d"
+        Title="Создание товара" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Background="{StaticResource BackgroundImageBrush}" Grid.Column="0" Grid.Row="0">
+            <StackPanel Margin="20">
+                <StackPanel>
+                    <TextBlock FontSize="30" FontWeight="DemiBold">Создание товара</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                    <StackPanel >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="13">Наименование*</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock FontSize="13">Артикул*</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock FontSize="13">Цена*</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock FontSize="13">Количество (0)</TextBlock>
+                        </StackPanel>
+                        
+                        
+                    </StackPanel>
+                    <StackPanel Margin="10,0,0,0" >
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBox Width="200" Name="ProductNameField"  MaxLength="128"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBox Width="200" Name="ProductSKUField" MaxLength="64"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBox Width="75" Name="ProductPriceField"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBox Width="75" Name="ProductCountField"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+            <StackPanel>
+                <Button x:Name="SaveExitButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="SaveExitButton_Click">
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
+                        Сохранить <LineBreak/> и выйти
+                    </TextBlock>
+                </Button>
+                <Button x:Name="ExitButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="ExitButton_Click">
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
+                        Выйти без <LineBreak/> сохранения
+                    </TextBlock>
+                </Button>
+
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
