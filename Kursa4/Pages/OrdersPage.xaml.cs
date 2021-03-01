@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Kursa4.Entitities;
+using Kursa4.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,11 +25,41 @@ namespace Kursa4.Pages
         public OrdersPage()
         {
             InitializeComponent();
+            ReloadOrders();
+        }
+
+        private void ReloadOrders()
+        {
+            var query = (from order in App.DB.Orders
+                         select order);
+            if (StartDatePicker.SelectedDate.HasValue)
+            {
+                query = (from order in App.DB.Orders
+                         where order.CreatedAt >= StartDatePicker.SelectedDate.Value
+                         select order);
+            }
+            if (EndDatePicker.SelectedDate.HasValue)
+            {
+                query = (from order in App.DB.Orders
+                         where order.CreatedAt <= StartDatePicker.SelectedDate.Value
+                         select order);
+            }
+            if (StartDatePicker.SelectedDate.HasValue && EndDatePicker.SelectedDate.HasValue)
+            {
+                query = (from order in App.DB.Orders
+                         where order.CreatedAt >= StartDatePicker.SelectedDate.Value &&
+                         order.CreatedAt <= EndDatePicker.SelectedDate.Value
+                         select order);
+            }
+            OrdersDataGrid.ItemsSource = query.ToList<Order>();
+
         }
 
         private void ChangeStatusButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var changeOrderStatusWindow = new ChangeOrderStatusWindow();
+            changeOrderStatusWindow.ShowDialog();
+            
         }
 
         private void OrderInfoButton_Click(object sender, RoutedEventArgs e)
@@ -37,7 +69,8 @@ namespace Kursa4.Pages
 
         private void MakeOrderButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var makeOrderButton = new MakeOrderWindow();
+            makeOrderButton.ShowDialog();
         }
     }
 }

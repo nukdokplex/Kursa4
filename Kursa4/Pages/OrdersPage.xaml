@@ -29,12 +29,12 @@
                     <StackPanel Margin="0,10,0,0">
                         <DataGrid x:Name="OrdersDataGrid" Height="250" AutoGenerateColumns="False" CanUserAddRows="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" x:Name="OrderIDColumn" Visibility="Collapsed" Binding="{Binding ID, Mode=TwoWay}"/>
-                                <DataGridTextColumn Header="Покупатель" x:Name="OrderCustomerColumn" Width="1.8*" Binding="{Binding Name, Mode=TwoWay}"/>
-                                <DataGridTextColumn Header="Продавец" x:Name="OrderMerchantColumn" Width="1.8*" Binding="{Binding SKU, Mode=TwoWay}"/>
-                                <DataGridTextColumn Header="Дата создания" x:Name="OrderCreatedAtColumn" Width="1.5*" Binding="{Binding Price, Mode=TwoWay}"/>
-                                <DataGridTextColumn Header="Дедлайн" x:Name="OrderDeadlineAtColumn" Width="1.5*" Binding="{Binding Price, Mode=TwoWay}"/>
-                                <DataGridTextColumn Header="Статус" x:Name="OrderStatusColumn" Width="0.6*" Binding="{Binding Count, Mode=TwoWay}"/>
+                                <DataGridTextColumn Header="ID" x:Name="OrderIDColumn" Visibility="Collapsed" IsReadOnly="True" Binding="{Binding ID, Mode=TwoWay}"/>
+                                <DataGridTextColumn Header="Покупатель" x:Name="OrderCustomerColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding User.Name, Mode=OneWay}"/>
+                                <DataGridTextColumn Header="Продавец" x:Name="OrderMerchantColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding User1.Name, Mode=OneWay}"/>
+                                <DataGridTextColumn Header="Дата создания" x:Name="OrderCreatedAtColumn" Width="1.5*" Binding="{Binding CreatedAt, Mode=TwoWay}"/>
+                                <DataGridTextColumn Header="Дедлайн" x:Name="OrderDeadlineAtColumn" Width="1.5*" Binding="{Binding DeadlineAt, Mode=TwoWay}"/>
+                                <DataGridTextColumn Header="Статус" x:Name="OrderStatusColumn" Width="0.6*" IsReadOnly="True" Binding="{Binding OrderStatu.Name, Mode=OneWay}"/>
                                 <DataGridTemplateColumn Header="" x:Name="OrderChangeStatusColumn" Width="0.8*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
