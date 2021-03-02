@@ -170,6 +170,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Entitities\SelectedProduct.cs" />
     <Compile Include="Windows\ChangeOrderStatusWindow.xaml.cs">
       <DependentUpon>ChangeOrderStatusWindow.xaml</DependentUpon>
     </Compile>

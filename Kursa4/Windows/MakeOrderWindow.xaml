@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Kursa4.Windows"
         mc:Ignorable="d"
         xmlns:numeric="http://gu.se/NumericInput"
-        Title="MakeOrderWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Новый заказ" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -57,10 +57,10 @@
                             </StackPanel>
                             <DataGrid x:Name="SelectedProductsDataGrid" Height="250" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID" x:Name="SelectedProductRealNameColumn" Visibility="Collapsed" Width="1.8*" IsReadOnly="True" Binding="{Binding ID, Mode=OneWay}"/>
-                                    <DataGridTextColumn Header="Наименование" x:Name="SelectedProductNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding Name, Mode=OneWay}"/>
-                                    <DataGridTextColumn Header="Кол-во" x:Name="SelectedProductCountColumn" Width="1*" IsReadOnly="True" Binding="{Binding Count, Mode=OneWay}"/>
-                                    <DataGridTextColumn Header="Цена" x:Name="SelectedProductPriceColumn" Width="1*" IsReadOnly="True" Binding="{Binding Count, Mode=OneWay}"/>
+                                    <DataGridTextColumn Header="ID" x:Name="SelectedProductRealNameColumn" Visibility="Collapsed" Width="1.8*" IsReadOnly="True" Binding="{Binding ID, Mode=TwoWay}"/>
+                                    <DataGridTextColumn Header="Наименование" x:Name="SelectedProductNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding Name, Mode=TwoWay}"/>
+                                    <DataGridTextColumn Header="Кол-во" x:Name="SelectedProductCountColumn" Width="1*" IsReadOnly="True" Binding="{Binding Count, Mode=TwoWay}"/>
+                                    <DataGridTextColumn Header="Цена" x:Name="SelectedProductPriceColumn" Width="1*" IsReadOnly="True" Binding="{Binding Price, Mode=TwoWay}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
@@ -83,10 +83,10 @@
                             </StackPanel>
                             <DataGrid x:Name="AvailableProductsDataGrid" Height="250" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID" x:Name="AvailableProductRealNameColumn" Visibility="Collapsed" Width="1.8*" IsReadOnly="True" Binding="{Binding ID, Mode=OneWay}"/>
-                                    <DataGridTextColumn Header="Наименование" x:Name="AvailableProductNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding Name, Mode=OneWay}"/>
-                                    <DataGridTextColumn Header="Кол-во" x:Name="AvailableProductCountColumn" Width="1*" IsReadOnly="True" Binding="{Binding Count, Mode=OneWay}"/>
-                                    <DataGridTextColumn Header="Цена" x:Name="AvailableProductPriceColumn" Width="1*" IsReadOnly="True" Binding="{Binding Count, Mode=OneWay}"/>
+                                    <DataGridTextColumn Header="ID" x:Name="AvailableProductRealNameColumn" Visibility="Collapsed" Width="1.8*" IsReadOnly="True" Binding="{Binding ID, Mode=TwoWay}"/>
+                                    <DataGridTextColumn Header="Наименование" x:Name="AvailableProductNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding Name, Mode=TwoWay}"/>
+                                    <DataGridTextColumn Header="Кол-во" x:Name="AvailableProductCountColumn" Width="1*" IsReadOnly="True" Binding="{Binding Count, Mode=TwoWay}"/>
+                                    <DataGridTextColumn Header="Цена" x:Name="AvailableProductPriceColumn" Width="1*" IsReadOnly="True" Binding="{Binding Price, Mode=TwoWay}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
