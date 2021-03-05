@@ -32,6 +32,7 @@ namespace Kursa4.Pages
         {
             var query = (from order in App.DB.Orders
                          select order);
+            
             if (StartDatePicker.SelectedDate.HasValue)
             {
                 query = (from order in App.DB.Orders
@@ -52,25 +53,53 @@ namespace Kursa4.Pages
                          select order);
             }
             OrdersDataGrid.ItemsSource = query.ToList<Order>();
+            OrdersDataGrid.Items.Refresh();
 
         }
 
         private void ChangeStatusButton_Click(object sender, RoutedEventArgs e)
         {
-            var changeOrderStatusWindow = new ChangeOrderStatusWindow();
+            Order order = OrdersDataGrid.SelectedItem as Order;
+            var changeOrderStatusWindow = new ChangeOrderStatusWindow(order.ID);
             changeOrderStatusWindow.ShowDialog();
             
         }
 
         private void OrderInfoButton_Click(object sender, RoutedEventArgs e)
         {
+            if (OrdersDataGrid.SelectedItem == null)
+            {
+                MessageBox.Show(
+                    "Сначала выберите заказ!",
+                    "Внимание",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning
+                );
+                return;
+            }
 
+            Order order = OrdersDataGrid.SelectedItem as Order;
+
+            OrderDetailsWindow orderDetailsWindow = new OrderDetailsWindow(order.ID);
+            orderDetailsWindow.ShowDialog();
+
+            ReloadOrders();
         }
 
         private void MakeOrderButton_Click(object sender, RoutedEventArgs e)
         {
             var makeOrderButton = new MakeOrderWindow();
             makeOrderButton.ShowDialog();
+            ReloadOrders();
+        }
+
+        private void StartDatePicker_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            DatePicker picker = sender as DatePicker;
+            if (picker.SelectedDate != null)
+            {
+                ReloadOrders();
+            }
         }
     }
 }

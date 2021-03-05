@@ -1,12 +1,12 @@
-﻿<Window x:Class="Kursa4.Windows.MakeOrderWindow"
+﻿<Window x:Class="Kursa4.Windows.OrderDetailsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kursa4.Windows"
-        mc:Ignorable="d"
         xmlns:numeric="http://gu.se/NumericInput"
-        Title="Новый заказ" Height="450" Width="800" Loaded="Window_Loaded">
+        mc:Ignorable="d"
+        Title="Детали заказа" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -18,30 +18,34 @@
         <ScrollViewer Background="{StaticResource BackgroundImageBrush}" Grid.Column="0" Grid.Row="0">
             <StackPanel Margin="20">
                 <StackPanel>
-                    <TextBlock FontSize="30" FontWeight="DemiBold">Новый заказ</TextBlock>
+                    <TextBlock FontSize="30" FontWeight="DemiBold">Детали заказа</TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                     <StackPanel >
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="13">Срок выполнения заказа (опционально)</TextBlock>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="13">Покупатель</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="13">Продавец</TextBlock>
+                        </StackPanel>
                     </StackPanel>
                     <StackPanel Margin="10,0,0,0" >
                         <StackPanel Orientation="Horizontal" >
-                            <DatePicker Width="125" Name="DeadlineAtField" SelectedDateChanged="DeadlineAtField_SelectedDateChanged"/>
+                            <DatePicker Width="125" Name="DeadlineAtField"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock x:Name="CustomerField" DataContext="{Binding Path=CurrentCustomer}" Text="{Binding Path=RealName}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock x:Name="MerchantField" DataContext="{Binding Path=CurrentMerchant}" Text="{Binding Path=RealName}"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Margin="0,10,0,0" Visibility="Visible">
-                    <DataGrid x:Name="CustomersDataGrid" Height="250" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" x:Name="CustomerIDColumn" Visibility="Collapsed" IsReadOnly="True" Binding="{Binding ID, Mode=OneWay}"/>
-                            <DataGridTextColumn Header="ФИО" x:Name="CustomerRealNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding RealName, Mode=OneWay}"/>
-                            <DataGridTextColumn Header="Ник" x:Name="CustomerNickNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding NickName, Mode=OneWay}"/>
-                            <DataGridTextColumn Header="Роль" x:Name="CustomerRoleColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding UserType.Name, Mode=OneWay}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
+                
+                    
                 <StackPanel Margin="0,10,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -91,7 +95,7 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
-                        
+
                     </Grid>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -113,7 +117,11 @@
                         Выйти без <LineBreak/> сохранения
                     </TextBlock>
                 </Button>
-
+                <Button x:Name="ExportButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="ExportButton_Click">
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
+                        Экспорт <LineBreak/> в PDF
+                    </TextBlock>
+                </Button>
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kursa4.Entitities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -27,9 +28,12 @@ namespace Kursa4
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
-        public ChangeOrderStatusWindow()
+
+        public long OrderID;
+        public ChangeOrderStatusWindow(long orderID)
         {
             InitializeComponent();
+            this.OrderID = orderID;
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -39,13 +43,25 @@ namespace Kursa4
 
         private void OkButton_Click(object sender, RoutedEventArgs e)
         {
-
+            (from order in App.DB.Orders
+             where order.ID == OrderID
+             select order).Single().Status = (OrderStatusComboBox.SelectedItem as OrderStatu).ID;
+            App.DB.SaveChanges();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var hwnd = new WindowInteropHelper(this).Handle;
             SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
+
+            var query = (from status in App.DB.OrderStatus
+                         select status);
+
+            OrderStatusComboBox.ItemsSource = query.ToList();
+            OrderStatusComboBox.SelectedItem = (from order in App.DB.Orders
+                                                where order.ID == OrderID
+                                                select order).Single().OrderStatu;
+            
         }
     }
 }

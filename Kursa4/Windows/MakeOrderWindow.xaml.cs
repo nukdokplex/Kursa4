@@ -34,6 +34,7 @@ namespace Kursa4.Windows
         {
             var query = (from user in App.DB.Users
                          select user);
+            
             CustomersDataGrid.ItemsSource = query.ToList();
             
         }
@@ -97,6 +98,7 @@ namespace Kursa4.Windows
                         App.DB.SaveChanges();
                         ReloadSelectedProducts();
                         ReloadAvailableProducts();
+                        ReloadTotal();
                         return;
                     }
                     continue;
@@ -114,67 +116,137 @@ namespace Kursa4.Windows
                 App.DB.SaveChanges();
                 ReloadSelectedProducts();
                 ReloadAvailableProducts();
+                ReloadTotal();
                 
             }
         }
 
         private void DeselectProduct_Click(object sender, RoutedEventArgs e)
         {
-            //TODO Implement product deselection
-            /*if (SelectedProductsDataGrid.SelectedItem != null)
+            if (SelectedProductsDataGrid.SelectedItem != null)
             {
-                Product currentProduct = SelectedProductsDataGrid.SelectedItem as Product;
-                int index = -1;
-
+                SelectedProduct currentProduct = SelectedProductsDataGrid.SelectedItem as SelectedProduct;
                 for (int i = 0; i <= SelectedProducts.Count - 1; i++)
                 {
                     if (SelectedProducts[i].ID == currentProduct.ID)
                     {
-                        index = i;
                         currentProduct = SelectedProducts[i];
+                        SelectedProducts.RemoveAt(i);
                         break;
                     }
                 }
 
-                if (index == -1)
-                {
-                    return;
-                }
+                (from product in App.DB.Products
+                 where product.ID == currentProduct.ID
+                 select product).Single().Count += currentProduct.Count;
 
-                SelectedProducts.RemoveAt(index);
-                
-                for (int i = 0; i <= AvailableProductsDataGrid.Items.Count -1; i++)
-                {
-                    if (currentProduct.ID == (AvailableProductsDataGrid.Items[i] as Product).ID)
-                    {
-                        (from product in App.DB.Products
-                         where product.ID == currentProduct.ID
-                         select product).Single().Count += currentProduct.Count;
-                        break;
-                    }
-                }
                 App.DB.SaveChanges();
                 ReloadSelectedProducts();
                 ReloadAvailableProducts();
-            }*/
+                ReloadTotal();
+            }
+        }
+
+        public void ReloadTotal()
+        {
+            decimal total = 0;
+
+            for (int i = 0; i <= SelectedProductsDataGrid.Items.Count - 1; i++)
+            {
+                SelectedProduct product = SelectedProductsDataGrid.Items[i] as SelectedProduct;
+                total += product.Count * product.Price;
+            }
+
+            TotalPriceField.Text = total.ToString();
         }
 
         private void SaveExitButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO Implement order save
+            Order order = new Order();
+
+            if (DeadlineAtField.SelectedDate.HasValue)
+            {
+                if (DeadlineAtField.SelectedDate.Value < DateTime.Now)
+                {
+                    MessageBox.Show(
+                        "Выбран некорректный срок выполнения заказа!",
+                        "Внимание!",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning
+                    );
+                    DeadlineAtField.SelectedDate = null;
+                    return;
+                }
+                order.DeadlineAt = DeadlineAtField.SelectedDate.Value;
+                
+            }
+
+            if (CustomersDataGrid.SelectedItem == null)
+            {
+                MessageBox.Show(
+                        "Выберите покупателя!",
+                        "Внимание!",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning
+                    );
+                return;
+            }
+
+            order.CreatedAt = DateTime.Now;
+            order.Merchant = App.CurrentUser.ID;
+            order.Customer = (CustomersDataGrid.SelectedItem as User).ID;
+            order.Status = 1;
+
+            App.DB.Orders.Add(order);
+
+            App.DB.SaveChanges();
+
+            foreach (object product in SelectedProductsDataGrid.Items)
+            {
+                SelectedProduct selectedProduct = product as SelectedProduct;
+                OrderProduct orderProduct = new OrderProduct();
+                orderProduct.Order = order.ID;
+                orderProduct.Product = selectedProduct.ID;
+                orderProduct.Count = selectedProduct.Count;
+                App.DB.OrderProducts.Add(orderProduct);
+            }
+
+            App.DB.SaveChanges();
+
+            MessageBox.Show(
+                "Заказ успешно создан!",
+                "Успех",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
+
+            
             this.Close();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO Implement agreement MessageBox
-            this.Close();
+            MessageBoxResult result = MessageBox.Show(
+                "Вы уверены, что хотите выйти без сохранения?",
+                "Подтверждение",
+                MessageBoxButton.OKCancel,
+                MessageBoxImage.Question
+            );
+
+            if (result == MessageBoxResult.OK)
+            {
+                this.Close();
+            }
+            else if (result == MessageBoxResult.Cancel)
+            {
+                return;
+            }
         }
 
         private void DeadlineAtField_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             //TODELETE This code isn't working at all
-            DatePicker datePicker = sender as DatePicker;
+            /*DatePicker datePicker = sender as DatePicker;
             if (datePicker.SelectedDate.HasValue && datePicker.SelectedDate.Value > DateTime.Now)
             {
                 MessageBox.Show(
@@ -184,7 +256,7 @@ namespace Kursa4.Windows
                     MessageBoxImage.Warning
                 );
                 datePicker.SelectedDate = null;
-            }
+            }*/
         }
     }
 }

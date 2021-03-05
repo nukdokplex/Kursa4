@@ -114,36 +114,7 @@ namespace Kursa4
                 product.Price = productPriceD;
                 App.DB.Products.Add(product);
                 App.DB.SaveChanges();
-                /*while (true)
-                {
-                    try
-                    {
-                        App.DB.Products.Add(product);
-                        App.DB.SaveChanges();
-
-                    }
-                    catch (Exception exception)
-                    {
-                        MessageBoxResult result = MessageBox.Show(
-                            $"Произошла ошибка во время сохранения в базу данных: \"${exception.Message}\". Повторить запрос?",
-                            "Ошибка!",
-                            MessageBoxButton.YesNoCancel,
-                            MessageBoxImage.Error
-                        );
-                        if (result == MessageBoxResult.Yes)
-                        {
-                            continue;
-                        }
-                        else if (result == MessageBoxResult.No)
-                        {
-                            break;
-                        }
-                        else if (result == MessageBoxResult.Cancel)
-                        {
-                            return;
-                        }
-                    }
-                }*/
+                
                 this.Close();
             }
         }

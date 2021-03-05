@@ -24,8 +24,6 @@ namespace Kursa4.Pages
         public ProductsPage()
         {
             InitializeComponent();
-            
-            
         }
 
         public void ReloadProducts()
@@ -34,16 +32,14 @@ namespace Kursa4.Pages
             if (!string.IsNullOrWhiteSpace(ProductSearchNameField.Text))
             {
                 var query = (from product in App.DB.Products where product.Name.ToLower().Contains(ProductSearchNameField.Text) select product);
-                IEnumerable<Product> products = query.ToList<Product>();
 
-                ProductsDataGrid.ItemsSource = products;
+                ProductsDataGrid.ItemsSource = query.ToList();
             }
             else
             {
                 var query = (from product in App.DB.Products select product);
-                IEnumerable<Product> products = query.ToList<Product>();
 
-                ProductsDataGrid.ItemsSource = products;
+                ProductsDataGrid.ItemsSource = query.ToList();
             }
         }
 
@@ -73,8 +69,6 @@ namespace Kursa4.Pages
                     MessageBoxButton.OK,
                     MessageBoxImage.Error
                 );
-                
-                
             }
             ReloadProducts();
         }
@@ -112,8 +106,6 @@ namespace Kursa4.Pages
                 App.DB.SaveChanges();
                 ReloadProducts();
             }
-
-            
         }
 
         private void ProductSearchNameField_KeyDown(object sender, KeyEventArgs e)

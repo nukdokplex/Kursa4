@@ -25,8 +25,11 @@
         <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock>Статус заказа:</TextBlock>
-                <ComboBox Name="OrderStatusComboBox" Width="100" Margin="5,0,0,0">
-                    <ComboBoxItem Content="{Binding Name}"/>
+                <ComboBox Name="OrderStatusComboBox" Width="100" Margin="5,0,0,0"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="Name"
+                          SelectedValue="{Binding Name}">
+                    
                 </ComboBox>
             </StackPanel>
         </StackPanel>
