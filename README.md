@@ -9,6 +9,7 @@
 - Microsoft SQL Server 2016
 - Entity Framework (EF)
 - Модель данных ADO.NET EDM
+- iText 7 (генерация PDF-документов)
 
 ### Среда проектирования
 - Windows 10 (Версия 20H2, сборка 19042.804)
