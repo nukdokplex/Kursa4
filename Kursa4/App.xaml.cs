@@ -23,6 +23,7 @@ namespace Kursa4
         {
             base.OnStartup(e);
             DB = new dbConnection();
+            
         }
 
         protected override void OnExit(ExitEventArgs e)

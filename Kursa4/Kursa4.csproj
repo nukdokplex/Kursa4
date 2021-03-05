@@ -207,6 +207,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Entitities\SelectedProduct.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Windows\ChangeOrderStatusWindow.xaml.cs">
       <DependentUpon>ChangeOrderStatusWindow.xaml</DependentUpon>
     </Compile>
@@ -258,6 +259,9 @@
     <Compile Include="Utils\Static.cs" />
     <Compile Include="Windows\CreateCustomerWindow.xaml.cs">
       <DependentUpon>CreateCustomerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DbConfiguratorWindow.xaml.cs">
+      <DependentUpon>DbConfiguratorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MakeOrderWindow.xaml.cs">
       <DependentUpon>MakeOrderWindow.xaml</DependentUpon>
@@ -313,6 +317,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DbConfiguratorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

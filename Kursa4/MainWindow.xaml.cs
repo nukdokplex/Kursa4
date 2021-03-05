@@ -30,6 +30,10 @@ namespace Kursa4
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
+            Properties.Settings.Default.Reload();
+            App.DB.Database.Connection.ConnectionString = Properties.Settings.Default.ConnectionString;
+
             //Header
             Header = new HeaderPage(ContentFrame);
             HeaderFrame.Navigate(Header);

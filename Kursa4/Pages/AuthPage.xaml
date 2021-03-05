@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Kursa4.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450"
-      Title="Авторизация" >
+      Title="Авторизация" Loaded="ConcretePage_Loaded">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -40,9 +40,11 @@
                     </StackPanel>
                     
                 </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="0,10,0,0" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
                     <Button x:Name="AuthButton" Content="Войти" FontSize="20" Width="100" Click="AuthButton_Click"/>
+                    <Button x:Name="DbConfigButton" Margin="10,0,0,0" Content="Конфигурация БД" FontSize="20" Width="200" Click="DbConfigButton_Click"/>
                 </StackPanel>
+                
             </StackPanel>
         </StackPanel>
     </Grid>

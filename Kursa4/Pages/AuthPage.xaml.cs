@@ -1,4 +1,5 @@
 ﻿using Kursa4.Entitities;
+using Kursa4.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,6 +124,116 @@ namespace Kursa4.Pages
             {
                 return PasswordField.Password;
             }
+        }
+
+        private void DbConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            string connectionStringBackup = App.DB.Database.Connection.ConnectionString;
+            while (true)
+            {
+                App.DB.Database.Connection.Close();
+                MessageBox.Show(App.DB.Database.Connection.ConnectionString);
+                DbConfiguratorWindow dbConfiguratorWindow = new DbConfiguratorWindow(App.DB.Database.Connection.ConnectionString);
+                dbConfiguratorWindow.ShowDialog();
+
+                try
+                {
+                    Properties.Settings.Default.ConnectionString = dbConfiguratorWindow.ConnectionString;
+                    App.DB.Database.Connection.ConnectionString = dbConfiguratorWindow.ConnectionString;
+                    App.DB.Database.Connection.Open();
+                }
+                catch(Exception exception)
+                {
+                    var result = MessageBox.Show(
+                        $"Не получилось подключиться к БД! Скорее всего, конфигурация базы данных неверна. Ошибка: \"{exception.Message}\". Вы хотите повторить настройку БД?",
+                        "Ошибка подключения к базе данных!",
+                        MessageBoxButton.YesNoCancel,
+                        MessageBoxImage.Error
+                    );
+
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+                            continue;
+                        case MessageBoxResult.No:
+                            Properties.Settings.Default.Save();
+                            return;
+                        case MessageBoxResult.Cancel:
+                            App.DB.Database.Connection.ConnectionString = connectionStringBackup;
+                            return;
+                    }
+                }
+            }
+
+            
+            
+            
+        }
+
+        private void ConcretePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show
+
+            try
+            {
+                App.DB.Database.Connection.Open();
+            }
+            catch (Exception exception)
+            {
+                var result = MessageBox.Show(
+                    $"Не получилось подключиться к БД! Скорее всего, конфигурация базы данных неверна. Ошибка: \"{exception.Message}\". Вы хотите провести настройку БД?",
+                    "Ошибка подключения к базе данных!",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Error
+                );
+
+                switch (result)
+                {
+                
+                    case MessageBoxResult.No:
+                        return;
+                    
+                }
+            }
+
+            string connectionStringBackup = App.DB.Database.Connection.ConnectionString;
+            while (true)
+            {
+                App.DB.Database.Connection.Close();
+                MessageBox.Show(App.DB.Database.Connection.ConnectionString);
+                DbConfiguratorWindow dbConfiguratorWindow = new DbConfiguratorWindow(App.DB.Database.Connection.ConnectionString);
+                dbConfiguratorWindow.ShowDialog();
+
+                try
+                {
+                    Properties.Settings.Default.ConnectionString = dbConfiguratorWindow.ConnectionString;
+                    App.DB.Database.Connection.ConnectionString = dbConfiguratorWindow.ConnectionString;
+                    App.DB.Database.Connection.Open();
+                }
+                catch (Exception exception)
+                {
+                    var result = MessageBox.Show(
+                        $"Не получилось подключиться к БД! Скорее всего, конфигурация базы данных неверна. Ошибка: \"{exception.Message}\". Вы хотите повторить настройку БД?",
+                        "Ошибка подключения к базе данных!",
+                        MessageBoxButton.YesNoCancel,
+                        MessageBoxImage.Error
+                    );
+
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+                            continue;
+                        case MessageBoxResult.No:
+                            Properties.Settings.Default.Save();
+                            return;
+                        case MessageBoxResult.Cancel:
+                            App.DB.Database.Connection.ConnectionString = connectionStringBackup;
+                            return;
+                    }
+                }
+            }
+
+
         }
     }
 }
