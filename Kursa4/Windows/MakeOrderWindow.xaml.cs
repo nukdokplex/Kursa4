@@ -243,20 +243,12 @@ namespace Kursa4.Windows
             }
         }
 
-        private void DeadlineAtField_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void CreateCustomerButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODELETE This code isn't working at all
-            /*DatePicker datePicker = sender as DatePicker;
-            if (datePicker.SelectedDate.HasValue && datePicker.SelectedDate.Value > DateTime.Now)
-            {
-                MessageBox.Show(
-                    "Срок выполнения заказа должен быть хотя бы на день позже текущей даты!",
-                    "Внимание!",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning
-                );
-                datePicker.SelectedDate = null;
-            }*/
+            CreateCustomerWindow createCustomerWindow = new CreateCustomerWindow();
+            createCustomerWindow.ShowDialog();
+
+            ReloadCustomers();
         }
     }
 }

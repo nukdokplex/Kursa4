@@ -28,7 +28,7 @@
                     </StackPanel>
                     <StackPanel Margin="10,0,0,0" >
                         <StackPanel Orientation="Horizontal" >
-                            <DatePicker Width="125" Name="DeadlineAtField" SelectedDateChanged="DeadlineAtField_SelectedDateChanged"/>
+                            <DatePicker Width="125" Name="DeadlineAtField"/>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
@@ -103,6 +103,11 @@
         </ScrollViewer>
         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
             <StackPanel>
+                <Button x:Name="CreateCustomerButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="CreateCustomerButton_Click">
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
+                        Создать <LineBreak/> покупателя
+                    </TextBlock>
+                </Button>
                 <Button x:Name="SaveExitButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="SaveExitButton_Click">
                     <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
                         Сохранить <LineBreak/> и выйти

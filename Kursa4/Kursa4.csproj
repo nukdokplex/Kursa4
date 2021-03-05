@@ -256,6 +256,9 @@
       <DependentUpon>OrdersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Static.cs" />
+    <Compile Include="Windows\CreateCustomerWindow.xaml.cs">
+      <DependentUpon>CreateCustomerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MakeOrderWindow.xaml.cs">
       <DependentUpon>MakeOrderWindow.xaml</DependentUpon>
     </Compile>
@@ -263,6 +266,10 @@
       <DependentUpon>OrderDetailsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Windows\ChangeOrderStatusWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CreateCustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
