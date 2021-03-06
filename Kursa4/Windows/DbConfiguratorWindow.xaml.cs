@@ -102,7 +102,7 @@ namespace Kursa4.Windows
 
         private void WindowsAuthentificationTypeField_Click(object sender, RoutedEventArgs e)
         {
-            AuthentificationSettingsContainer.IsEnabled = WindowsAuthentificationTypeField.IsChecked == true;
+            AuthentificationSettingsContainer.IsEnabled = SQLServerAuthentificationTypeField.IsChecked == true;
         }
 
         private void SaveExitButton_Click(object sender, RoutedEventArgs e)

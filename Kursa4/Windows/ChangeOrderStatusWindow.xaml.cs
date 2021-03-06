@@ -47,6 +47,7 @@ namespace Kursa4
              where order.ID == OrderID
              select order).Single().Status = (OrderStatusComboBox.SelectedItem as OrderStatu).ID;
             App.DB.SaveChanges();
+            this.Close();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

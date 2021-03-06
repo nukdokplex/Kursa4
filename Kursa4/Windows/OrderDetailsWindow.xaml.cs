@@ -255,9 +255,16 @@ namespace Kursa4.Windows
             Document document = new Document(pdf);
 
             //PdfFontFactory.Register("/Resources/Fonts/Roboto-Regular.ttf");
-            FontProgram fontProgram = FontProgramFactory.CreateFont(System.AppDomain.CurrentDomain.BaseDirectory+ "/fonts/Roboto-Regular.ttf");
+            //FontProgram fontProgram = FontProgramFactory.CreateFont(System.AppDomain.CurrentDomain.BaseDirectory+ "/fonts/Roboto-Regular.ttf");
 
-            var font = PdfFontFactory.CreateFont(fontProgram, PdfEncodings.IDENTITY_H, true); //10 is the size
+            //var font = PdfFontFactory.CreateFont(fontProgram, PdfEncodings.IDENTITY_H, true); //10 is the size
+
+            
+            byte[] fontContents = Static.ReadStreamFully(Static.GetResourceStream(new Uri("/Resources/Fonts/Roboto-Regular.ttf", UriKind.Relative)));
+
+            FontProgram fontProgram = FontProgramFactory.CreateFont(fontContents);
+            var font = PdfFontFactory.CreateFont(fontProgram, PdfEncodings.IDENTITY_H);
+
             document.SetFont(font);
 
             document.Add(new Paragraph("ЗАКАЗ")

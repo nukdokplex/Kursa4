@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Kursa4.Utils
@@ -20,6 +22,36 @@ namespace Kursa4.Utils
                 byte[] ba = new byte[resFilestream.Length];
                 resFilestream.Read(ba, 0, ba.Length);
                 return ba;
+            }
+        }
+
+        public static void WriteResourceToFile(string resourceName, string fileName)
+        {
+            using (var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
+            {
+                using (var file = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+                {
+                    resource.CopyTo(file);
+                }
+            }
+        }
+
+        public static Stream GetResourceStream(Uri uri)
+        {
+            return Application.GetResourceStream(uri).Stream;
+        }
+
+        public static byte[] ReadStreamFully(Stream input)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
             }
         }
     }

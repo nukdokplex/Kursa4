@@ -132,7 +132,7 @@ namespace Kursa4.Pages
             while (true)
             {
                 App.DB.Database.Connection.Close();
-                MessageBox.Show(App.DB.Database.Connection.ConnectionString);
+                //MessageBox.Show(App.DB.Database.Connection.ConnectionString);
                 DbConfiguratorWindow dbConfiguratorWindow = new DbConfiguratorWindow(App.DB.Database.Connection.ConnectionString);
                 dbConfiguratorWindow.ShowDialog();
 
@@ -163,17 +163,13 @@ namespace Kursa4.Pages
                             return;
                     }
                 }
+                Properties.Settings.Default.Save();
+                break;
             }
-
-            
-            
-            
         }
 
         private void ConcretePage_Loaded(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show
-
             try
             {
                 App.DB.Database.Connection.Open();
@@ -189,51 +185,53 @@ namespace Kursa4.Pages
 
                 switch (result)
                 {
-                
+
                     case MessageBoxResult.No:
                         return;
-                    
+
                 }
-            }
 
-            string connectionStringBackup = App.DB.Database.Connection.ConnectionString;
-            while (true)
-            {
-                App.DB.Database.Connection.Close();
-                MessageBox.Show(App.DB.Database.Connection.ConnectionString);
-                DbConfiguratorWindow dbConfiguratorWindow = new DbConfiguratorWindow(App.DB.Database.Connection.ConnectionString);
-                dbConfiguratorWindow.ShowDialog();
-
-                try
+                string connectionStringBackup = App.DB.Database.Connection.ConnectionString;
+                while (true)
                 {
-                    Properties.Settings.Default.ConnectionString = dbConfiguratorWindow.ConnectionString;
-                    App.DB.Database.Connection.ConnectionString = dbConfiguratorWindow.ConnectionString;
-                    App.DB.Database.Connection.Open();
-                }
-                catch (Exception exception)
-                {
-                    var result = MessageBox.Show(
-                        $"Не получилось подключиться к БД! Скорее всего, конфигурация базы данных неверна. Ошибка: \"{exception.Message}\". Вы хотите повторить настройку БД?",
-                        "Ошибка подключения к базе данных!",
-                        MessageBoxButton.YesNoCancel,
-                        MessageBoxImage.Error
-                    );
+                    App.DB.Database.Connection.Close();
+                    //MessageBox.Show(App.DB.Database.Connection.ConnectionString);
+                    DbConfiguratorWindow dbConfiguratorWindow = new DbConfiguratorWindow(App.DB.Database.Connection.ConnectionString);
+                    dbConfiguratorWindow.ShowDialog();
 
-                    switch (result)
+                    try
                     {
-                        case MessageBoxResult.Yes:
-                            continue;
-                        case MessageBoxResult.No:
-                            Properties.Settings.Default.Save();
-                            return;
-                        case MessageBoxResult.Cancel:
-                            App.DB.Database.Connection.ConnectionString = connectionStringBackup;
-                            return;
+                        Properties.Settings.Default.ConnectionString = dbConfiguratorWindow.ConnectionString;
+                        App.DB.Database.Connection.ConnectionString = dbConfiguratorWindow.ConnectionString;
+                        App.DB.Database.Connection.Open();
                     }
+                    catch (Exception exc)
+                    {
+                        var res = MessageBox.Show(
+                            $"Не получилось подключиться к БД! Скорее всего, конфигурация базы данных неверна. Ошибка: \"{exc.Message}\". Вы хотите повторить настройку БД?",
+                            "Ошибка подключения к базе данных!",
+                            MessageBoxButton.YesNoCancel,
+                            MessageBoxImage.Error
+                        );
+
+                        switch (res)
+                        {
+                            case MessageBoxResult.Yes:
+                                continue;
+                            case MessageBoxResult.No:
+                                Properties.Settings.Default.Save();
+                                break;
+                            case MessageBoxResult.Cancel:
+                                App.DB.Database.Connection.ConnectionString = connectionStringBackup;
+                                break;
+
+                        }
+                        break;
+                    }
+                    Properties.Settings.Default.Save();
+                    break;
                 }
             }
-
-
         }
     }
 }

@@ -62,7 +62,7 @@ namespace Kursa4.Pages
             Order order = OrdersDataGrid.SelectedItem as Order;
             var changeOrderStatusWindow = new ChangeOrderStatusWindow(order.ID);
             changeOrderStatusWindow.ShowDialog();
-            
+            ReloadOrders();
         }
 
         private void OrderInfoButton_Click(object sender, RoutedEventArgs e)
