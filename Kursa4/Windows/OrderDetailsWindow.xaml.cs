@@ -1,5 +1,6 @@
 ﻿using iText.IO.Font;
 using iText.IO.Font.Constants;
+using iText.Kernel;
 using iText.Kernel.Font;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Draw;
@@ -9,6 +10,7 @@ using Kursa4.Entitities;
 using Kursa4.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
@@ -250,22 +252,33 @@ namespace Kursa4.Windows
             if (!result.Equals(System.Windows.Forms.DialogResult.OK)){
                 return;
             }
-            PdfWriter writer = new PdfWriter(sfd.FileName);
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf);
 
-            //PdfFontFactory.Register("/Resources/Fonts/Roboto-Regular.ttf");
-            //FontProgram fontProgram = FontProgramFactory.CreateFont(System.AppDomain.CurrentDomain.BaseDirectory+ "/fonts/Roboto-Regular.ttf");
+            if (File.Exists(sfd.FileName))
+            {
+                File.Delete(sfd.FileName);
+            }
 
-            //var font = PdfFontFactory.CreateFont(fontProgram, PdfEncodings.IDENTITY_H, true); //10 is the size
+            PdfDocument pdfDoc;
+            try
+            {
+                pdfDoc = new PdfDocument(new PdfWriter(sfd.FileName));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(
+                    $"При попытке закрытия документа произошла ошибка: \"{exception.Message}\". Невозможно установить причину возникновения этой ошибки.",
+                    "Ошибка!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+                return;
+            }
 
-            
-            byte[] fontContents = Static.ReadStreamFully(Static.GetResourceStream(new Uri("/Resources/Fonts/Roboto-Regular.ttf", UriKind.Relative)));
+          
 
-            FontProgram fontProgram = FontProgramFactory.CreateFont(fontContents);
-            var font = PdfFontFactory.CreateFont(fontProgram, PdfEncodings.IDENTITY_H);
+            Document document = new Document(pdfDoc);
 
-            document.SetFont(font);
+            document.SetFont(App.DefaultPdfFont);
 
             document.Add(new Paragraph("ЗАКАЗ")
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
@@ -287,17 +300,25 @@ namespace Kursa4.Windows
                 );
             }
 
-            LineSeparator ls = new LineSeparator(new SolidLine());
-            document.Add(ls);
+            
 
-            Table users = new Table(2, false);
+            Table users = new Table(2, true);
+            document.Add(users);
             users.AddHeaderCell(new Cell().Add(new Paragraph("Покупатель").SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)));
             users.AddHeaderCell(new Cell().Add(new Paragraph("Продавец").SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)));
+            users.Flush();
             users.AddCell(new Cell().Add(new Paragraph(CurrentCustomer.RealName)));
             users.AddCell(new Cell().Add(new Paragraph(CurrentMerchant.RealName)));
+            //users.Flush();
+            users.Complete();
+
+
+
+            document.Add(new Paragraph());
+
 
             Table products = new Table(4, true);
-
+            document.Add(products);
             products.AddHeaderCell(new Cell(1, 1)
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
                 .Add(new Paragraph("Наименование"))
@@ -314,7 +335,7 @@ namespace Kursa4.Windows
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
                 .Add(new Paragraph("Сумма"))
             );
-
+            products.Flush();
             List<OrderProduct> orderProducts = (from op in App.DB.OrderProducts
                                                 where op.Order == CurrentOrder.ID
                                                 select op).ToList();
@@ -338,16 +359,33 @@ namespace Kursa4.Windows
                     .SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT)
                     .Add(new Paragraph((op.Product1.Price*op.Count).ToString()))
                 );
-
+                products.Flush();
                 total += op.Product1.Price * op.Count;
             }
-            document.Add(products);
+
+            
+            //products.Flush();
+            products.Complete();
+            
             document.Add(new Paragraph("Итого: " + total.ToString()+ " руб.")
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT)
                 .SetFontSize(15)
                 .SetBold()
             );
-            document.Close();
+            try
+            {
+                document.Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(
+                    $"При попытке закрытия документа произошла ошибка: \"{exception.Message}\". Невозможно установить причину возникновения этой ошибки.",
+                    "Ошибка!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+                return;
+            }
         }
     }
 }

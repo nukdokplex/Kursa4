@@ -65,7 +65,11 @@
                         Создать <LineBreak/> товар
                     </TextBlock>
                 </Button>
-                
+                <Button x:Name="ExportButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="ExportButton_Click">
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
+                        Экспорт в <LineBreak/> PDF
+                    </TextBlock>
+                </Button>
             </StackPanel>
         </StackPanel>
     </Grid>

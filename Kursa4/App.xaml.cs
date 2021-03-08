@@ -8,6 +8,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Resources;
+using iText.IO.Font;
+using iText.Kernel.Font;
 using Kursa4.Entitities;
 using Kursa4.Utils;
 
@@ -22,33 +24,22 @@ namespace Kursa4
     {
         public static Entitities.dbConnection DB;
         public static User? CurrentUser;
+        public static PdfFont DefaultPdfFont;
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            InitializeiTextFonts();
             base.OnStartup(e);
             DB = new dbConnection();
 
-            //Unpacking fonts, used by iText
-            //Now reading list of font files stored in Resources/Fonts/FontList.txt
+        }
 
-            var resourceStream = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/Fonts/FontList.txt"));
-            List<string> fonts = new List<string>();
+        protected void InitializeiTextFonts()
+        {
+            byte[] fontContents = Static.ReadStreamFully(Static.GetResourceStream(new Uri("/Resources/Fonts/Roboto-Regular.ttf", UriKind.Relative)));
 
-            using (var reader = new StreamReader(resourceStream.Stream))
-            {
-                while (!reader.EndOfStream)
-                {
-                    fonts.Add(reader.ReadLine());
-                }    
-            }
-            
-            if (!Directory.Exists("Fonts"))
-            {
-                Directory.CreateDirectory("Fonts");
-            }
-
-            
-            
+            var fontProgram = FontProgramFactory.CreateFont(fontContents);
+            DefaultPdfFont = PdfFontFactory.CreateFont(fontProgram, PdfEncodings.IDENTITY_H);
         }
 
         protected override void OnExit(ExitEventArgs e)
