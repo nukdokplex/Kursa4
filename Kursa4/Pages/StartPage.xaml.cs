@@ -1,19 +1,9 @@
 ﻿using Kursa4.Entitities;
 using Kursa4.Windows;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Kursa4.Pages
 {
@@ -27,8 +17,9 @@ namespace Kursa4.Pages
         public ProductsPage? productsPage = null;
         public OrdersPage? ordersPage = null;
         public ReportsPage? reportsPage = null;
-        
-        public User CurrentUser {
+
+        public User CurrentUser
+        {
             get;
             set;
         }
@@ -40,7 +31,6 @@ namespace Kursa4.Pages
             RemoveLastBackEntry = removeLastBackEntry;
             CurrentUser = App.CurrentUser;
             this.DataContext = this;
-            
         }
 
         private void ConcretePage_Loaded(object sender, RoutedEventArgs e)

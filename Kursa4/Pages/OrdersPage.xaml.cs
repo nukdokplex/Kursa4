@@ -1,19 +1,8 @@
 ﻿using Kursa4.Entitities;
 using Kursa4.Windows;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Kursa4.Pages
 {
@@ -32,7 +21,7 @@ namespace Kursa4.Pages
         {
             var query = (from order in App.DB.Orders
                          select order);
-            
+
             if (StartDatePicker.SelectedDate.HasValue)
             {
                 query = (from order in App.DB.Orders
@@ -54,7 +43,6 @@ namespace Kursa4.Pages
             }
             OrdersDataGrid.ItemsSource = query.ToList<Order>();
             OrdersDataGrid.Items.Refresh();
-
         }
 
         private void ChangeStatusButton_Click(object sender, RoutedEventArgs e)

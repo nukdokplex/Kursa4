@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Interop;
 
 namespace Kursa4.Windows
@@ -13,12 +12,15 @@ namespace Kursa4.Windows
     {
         private const int GWL_STYLE = -16;
         private const int WS_SYSMENU = 0x80000;
+
         [DllImport("user32.dll", SetLastError = true)]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
         public List<SelectedProduct> SelectedProducts { get; set; }
+
         public MakeOrderWindow()
         {
             InitializeComponent();
@@ -28,17 +30,13 @@ namespace Kursa4.Windows
             SelectedProductsDataGrid.ItemsSource = SelectedProducts;
         }
 
-        
-
         private void ReloadCustomers()
         {
             var query = (from user in App.DB.Users
                          select user);
-            
-            CustomersDataGrid.ItemsSource = query.ToList();
-            
-        }
 
+            CustomersDataGrid.ItemsSource = query.ToList();
+        }
 
         private void ReloadAvailableProducts()
         {
@@ -89,7 +87,7 @@ namespace Kursa4.Windows
                     return;
                 }
 
-                for (int i = 0; i <= SelectedProducts.Count -1; i++)
+                for (int i = 0; i <= SelectedProducts.Count - 1; i++)
                 {
                     if (currentProduct.ID == SelectedProducts[i].ID)
                     {
@@ -103,12 +101,11 @@ namespace Kursa4.Windows
                     }
                     continue;
                 }
-                
-                
+
                 SelectedProducts.Add(new SelectedProduct(
-                    currentProduct.ID, 
-                    currentProduct.Name, 
-                    currentProduct.Price, 
+                    currentProduct.ID,
+                    currentProduct.Name,
+                    currentProduct.Price,
                     SelectProductCount.Value.Value
                     )
                 );
@@ -117,7 +114,6 @@ namespace Kursa4.Windows
                 ReloadSelectedProducts();
                 ReloadAvailableProducts();
                 ReloadTotal();
-                
             }
         }
 
@@ -178,7 +174,6 @@ namespace Kursa4.Windows
                     return;
                 }
                 order.DeadlineAt = DeadlineAtField.SelectedDate.Value;
-                
             }
 
             if (CustomersDataGrid.SelectedItem == null)
@@ -220,7 +215,6 @@ namespace Kursa4.Windows
                 MessageBoxImage.Information
             );
 
-            
             this.Close();
         }
 

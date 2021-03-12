@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace Kursa4.Utils
 {
-    class Static
+    internal class Static
     {
         //public static void AllowOnlyFloat(object sender, KeyPressEventArgs e)
         public static byte[] ExtractResource(String filename)

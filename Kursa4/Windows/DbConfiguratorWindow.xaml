@@ -8,11 +8,11 @@
         Title="Конфигуратор Базы Данных" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <ScrollViewer Background="{StaticResource BackgroundImageBrush}" Grid.Column="0" Grid.Row="0">
             <StackPanel Margin="20">
@@ -20,7 +20,7 @@
                     <TextBlock FontSize="30" FontWeight="DemiBold">Конфигуратор базы данных</TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="Visible">
-                    <StackPanel >
+                    <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="13">Сервер</TextBlock>
                         </StackPanel>
@@ -39,12 +39,9 @@
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <TextBlock FontSize="13">Ожидание</TextBlock>
                         </StackPanel>
-                        
-
-
                     </StackPanel>
-                    <StackPanel Margin="10,0,0,0" >
-                        <StackPanel Orientation="Horizontal" >
+                    <StackPanel Margin="10,0,0,0">
+                        <StackPanel Orientation="Horizontal">
                             <TextBox Width="200" Name="ServerField"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -63,12 +60,11 @@
                             <TextBox Width="200" Name="ConnectionTimeoutFieldName"></TextBox>
                         </StackPanel>
                     </StackPanel>
-                    
                 </StackPanel>
-                <CheckBox Name="SSLField" Content="Использовать шифрование" Margin="0,10,0,0"/>
-                <CheckBox IsChecked="True" Name="PoolField" Content="Использовать пуллинг соединения" Margin="0,10,0,0" Click="PoolField_Click"/>
+                <CheckBox Name="SSLField" Content="Использовать шифрование" Margin="0,10,0,0" />
+                <CheckBox IsChecked="True" Name="PoolField" Content="Использовать пуллинг соединения" Margin="0,10,0,0" Click="PoolField_Click" />
                 <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Name="PoolSettingsContainer">
-                    <StackPanel >
+                    <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="13">Минимальный размер</TextBlock>
                         </StackPanel>
@@ -79,8 +75,8 @@
                             <TextBlock FontSize="13">Время жизни соединения</TextBlock>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Margin="10,0,0,0" >
-                        <StackPanel Orientation="Horizontal" >
+                    <StackPanel Margin="10,0,0,0">
+                        <StackPanel Orientation="Horizontal">
                             <TextBox Width="75" Name="MinPoolSizeField"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -90,46 +86,41 @@
                             <TextBox Width="75" Name="ConnectionLifetimeField"></TextBox>
                         </StackPanel>
                     </StackPanel>
-
                 </StackPanel>
                 <RadioButton GroupName="AuthentificationType" Name="WindowsAuthentificationTypeField" IsChecked="True" Margin="0,10,0,0" Click="WindowsAuthentificationTypeField_Click">Windows-аутентификация</RadioButton>
                 <RadioButton GroupName="AuthentificationType" Name="SQLServerAuthentificationTypeField" Margin="0,5,0,0" Click="WindowsAuthentificationTypeField_Click">SQL Server аутентификация</RadioButton>
                 <StackPanel Orientation="Horizontal" Margin="10,10,0,0" Name="AuthentificationSettingsContainer">
-                    <StackPanel >
+                    <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="13">Имя пользователя</TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <TextBlock FontSize="13">Пароль</TextBlock>
                         </StackPanel>
-                        
                     </StackPanel>
-                    <StackPanel Margin="10,0,0,0" >
-                        <StackPanel Orientation="Horizontal" >
+                    <StackPanel Margin="10,0,0,0">
+                        <StackPanel Orientation="Horizontal">
                             <TextBox Width="125" Name="UserNameField"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <TextBox Width="125" Name="PasswordField"></TextBox>
                         </StackPanel>
-                        
                     </StackPanel>
-
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
             <StackPanel>
                 <Button x:Name="SaveExitButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="SaveExitButton_Click">
-                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
-                        Сохранить <LineBreak/> и выйти
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center">
+                        Сохранить <LineBreak /> и выйти
                     </TextBlock>
                 </Button>
                 <Button x:Name="ExitButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="ExitButton_Click">
-                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
-                        Выйти без <LineBreak/> сохранения
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center">
+                        Выйти без <LineBreak /> сохранения
                     </TextBlock>
                 </Button>
-
             </StackPanel>
         </StackPanel>
     </Grid>

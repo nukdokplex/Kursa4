@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Kursa4.Entitities
+﻿namespace Kursa4.Entitities
 {
     public class SelectedProduct
     {

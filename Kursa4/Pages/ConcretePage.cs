@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
@@ -15,6 +11,7 @@ namespace Kursa4.Pages
     public class ConcretePage : Page
     {
         protected bool _isLoading;
+
         public bool IsLoading
         {
             get
@@ -42,7 +39,6 @@ namespace Kursa4.Pages
             }
             catch (Exception e)
             {
-                
             }
         }
 
@@ -654,7 +650,5 @@ namespace Kursa4.Pages
         {
             return base.ShouldSerializeProperty(dp);
         }
-
-
     }
 }

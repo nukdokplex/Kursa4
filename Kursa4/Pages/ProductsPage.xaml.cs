@@ -1,5 +1,4 @@
 ﻿using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Layout;
 using iText.Layout.Element;
 using Kursa4.Entitities;
@@ -7,16 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Kursa4.Pages
 {
@@ -32,7 +23,6 @@ namespace Kursa4.Pages
 
         public void ReloadProducts()
         {
-            
             if (!string.IsNullOrWhiteSpace(ProductSearchNameField.Text))
             {
                 var query = (from product in App.DB.Products where product.Name.ToLower().Contains(ProductSearchNameField.Text) select product);
@@ -66,7 +56,6 @@ namespace Kursa4.Pages
             }
             catch (Exception exception)
             {
-                
                 MessageBox.Show(
                     $"Произошла ошибка сохранения: {exception.Message}",
                     "Ошибка!",
@@ -95,7 +84,6 @@ namespace Kursa4.Pages
             Product product = (from p in App.DB.Products
                                where p.ID == productRow.ID
                                select p).Single();
-            
 
             MessageBoxResult result = MessageBox.Show(
                 "Вы действительно хотите удалить этот товар?",
@@ -156,8 +144,6 @@ namespace Kursa4.Pages
                 return;
             }
 
-
-
             Document document = new Document(pdfDoc);
 
             document.SetFont(App.GetDefaultPdfFont());
@@ -173,7 +159,6 @@ namespace Kursa4.Pages
             );
 
             document.Add(new Paragraph());
-
 
             Table products = new Table(4, true);
             document.Add(products);

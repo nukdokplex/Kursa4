@@ -7,15 +7,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Kursa4.Pages
 {
@@ -24,8 +18,8 @@ namespace Kursa4.Pages
     /// </summary>
     public partial class ReportsPage : ConcretePage
     {
-        IQueryable<Product> ProductsQuery;
-        IQueryable<Order> OrdersQuery;
+        private IQueryable<Product> ProductsQuery;
+        private IQueryable<Order> OrdersQuery;
 
         public ReportsPage()
         {
@@ -111,8 +105,6 @@ namespace Kursa4.Pages
                 return;
             }
 
-
-
             Document document = new Document(pdfDoc);
 
             document.SetFont(App.GetDefaultPdfFont());
@@ -123,19 +115,17 @@ namespace Kursa4.Pages
             );
 
             StringBuilder dateBuilder = new StringBuilder();
-            
+
             if (OrderStartDatePicker.SelectedDate.HasValue)
             {
                 dateBuilder.Append("c ")
                     .Append(OrderStartDatePicker.SelectedDate.ToString());
-
             }
 
             if (OrderEndDatePicker.SelectedDate.HasValue)
             {
                 dateBuilder.Append(" по ")
                     .Append(OrderEndDatePicker.SelectedDate.ToString());
-
             }
 
             string dates = dateBuilder.ToString();
@@ -151,7 +141,6 @@ namespace Kursa4.Pages
             );
 
             document.Add(new Paragraph());
-
 
             Table orders = new Table(6, true);
             document.Add(orders);
@@ -308,8 +297,6 @@ namespace Kursa4.Pages
                 return;
             }
 
-
-
             Document document = new Document(pdfDoc);
 
             document.SetFont(App.GetDefaultPdfFont());
@@ -325,7 +312,6 @@ namespace Kursa4.Pages
             );
 
             document.Add(new Paragraph());
-
 
             Table products = new Table(4, true);
             document.Add(products);
@@ -410,7 +396,5 @@ namespace Kursa4.Pages
                 ReloadProducts();
             }
         }
-
-        
     }
 }

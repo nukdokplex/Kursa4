@@ -1,19 +1,8 @@
 ﻿using Kursa4.Entitities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Kursa4
 {
@@ -24,10 +13,13 @@ namespace Kursa4
     {
         private const int GWL_STYLE = -16;
         private const int WS_SYSMENU = 0x80000;
+
         [DllImport("user32.dll", SetLastError = true)]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
         public CreateProductWindow()
         {
             InitializeComponent();
@@ -104,7 +96,6 @@ namespace Kursa4
             }
             else
             {
-                
                 Product product = new Product();
                 product.Author = App.CurrentUser.ID;
                 product.CreatedAt = DateTime.Now;
@@ -114,7 +105,7 @@ namespace Kursa4
                 product.Price = productPriceD;
                 App.DB.Products.Add(product);
                 App.DB.SaveChanges();
-                
+
                 this.Close();
             }
         }

@@ -1,19 +1,10 @@
 ﻿using Kursa4.Entitities;
 using Kursa4.Windows;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Kursa4.Pages
 {
@@ -79,8 +70,6 @@ namespace Kursa4.Pages
             NavigationService.RemoveBackEntry();
         }
 
-        
-
         private User? LoginUser(string login, string password)
         {
             try
@@ -142,7 +131,7 @@ namespace Kursa4.Pages
                     App.DB.Database.Connection.ConnectionString = dbConfiguratorWindow.ConnectionString;
                     App.DB.Database.Connection.Open();
                 }
-                catch(Exception exception)
+                catch (Exception exception)
                 {
                     var result = MessageBox.Show(
                         $"Не получилось подключиться к БД! Скорее всего, конфигурация базы данных неверна. Ошибка: \"{exception.Message}\". Вы хотите повторить настройку БД?",
@@ -158,6 +147,7 @@ namespace Kursa4.Pages
                         case MessageBoxResult.No:
                             Properties.Settings.Default.Save();
                             return;
+
                         case MessageBoxResult.Cancel:
                             App.DB.Database.Connection.ConnectionString = connectionStringBackup;
                             return;
@@ -185,10 +175,8 @@ namespace Kursa4.Pages
 
                 switch (result)
                 {
-
                     case MessageBoxResult.No:
                         return;
-
                 }
 
                 string connectionStringBackup = App.DB.Database.Connection.ConnectionString;
@@ -221,10 +209,10 @@ namespace Kursa4.Pages
                             case MessageBoxResult.No:
                                 Properties.Settings.Default.Save();
                                 break;
+
                             case MessageBoxResult.Cancel:
                                 App.DB.Database.Connection.ConnectionString = connectionStringBackup;
                                 break;
-
                         }
                         break;
                     }

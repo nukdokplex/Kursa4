@@ -8,11 +8,11 @@
         Title="Создание пользователя" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <ScrollViewer Background="{StaticResource BackgroundImageBrush}" Grid.Column="0" Grid.Row="0">
             <StackPanel Margin="20">
@@ -20,7 +20,7 @@
                     <TextBlock FontSize="30" FontWeight="DemiBold">Создание покупателя</TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
-                    <StackPanel >
+                    <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="13">Реальное имя*</TextBlock>
                         </StackPanel>
@@ -36,10 +36,9 @@
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                             <TextBlock FontSize="13">E-Mail</TextBlock>
                         </StackPanel>
-
                     </StackPanel>
-                    <StackPanel Margin="10,0,0,0" >
-                        <StackPanel Orientation="Horizontal" >
+                    <StackPanel Margin="10,0,0,0">
+                        <StackPanel Orientation="Horizontal">
                             <TextBox Width="200"  Name="RealNameField"  MaxLength="150"></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -61,16 +60,15 @@
         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
             <StackPanel>
                 <Button x:Name="SaveExitButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="SaveExitButton_Click">
-                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
-                        Сохранить <LineBreak/> и выйти
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center">
+                        Сохранить <LineBreak /> и выйти
                     </TextBlock>
                 </Button>
                 <Button x:Name="ExitButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="ExitButton_Click">
-                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
-                        Выйти без <LineBreak/> сохранения
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center">
+                        Выйти без <LineBreak /> сохранения
                     </TextBlock>
                 </Button>
-
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -8,13 +8,13 @@
         Title="Курсовой проект" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Frame Grid.Row="0" Grid.Column="0" Name="HeaderFrame" NavigationUIVisibility="Hidden"/>
-        <Frame Grid.Row="1" Grid.Column="0" Name="ContentFrame" NavigationUIVisibility="Hidden"/>
+        <Frame Grid.Row="0" Grid.Column="0" Name="HeaderFrame" NavigationUIVisibility="Hidden" />
+        <Frame Grid.Row="1" Grid.Column="0" Name="ContentFrame" NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>

@@ -9,11 +9,11 @@
         Title="Новый заказ" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <ScrollViewer Background="{StaticResource BackgroundImageBrush}" Grid.Column="0" Grid.Row="0">
             <StackPanel Margin="20">
@@ -21,36 +21,36 @@
                     <TextBlock FontSize="30" FontWeight="DemiBold">Новый заказ</TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <StackPanel >
+                    <StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="13">Срок выполнения заказа (опционально)</TextBlock>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Margin="10,0,0,0" >
-                        <StackPanel Orientation="Horizontal" >
-                            <DatePicker Width="125" Name="DeadlineAtField"/>
+                    <StackPanel Margin="10,0,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <DatePicker Width="125" Name="DeadlineAtField" />
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0" Visibility="Visible">
                     <DataGrid x:Name="CustomersDataGrid" Height="250" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" x:Name="CustomerIDColumn" Visibility="Collapsed" IsReadOnly="True" Binding="{Binding ID, Mode=OneWay}"/>
-                            <DataGridTextColumn Header="ФИО" x:Name="CustomerRealNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding RealName, Mode=OneWay}"/>
-                            <DataGridTextColumn Header="Ник" x:Name="CustomerNickNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding NickName, Mode=OneWay}"/>
-                            <DataGridTextColumn Header="Роль" x:Name="CustomerRoleColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding UserType.Name, Mode=OneWay}"/>
+                            <DataGridTextColumn Header="ID" x:Name="CustomerIDColumn" Visibility="Collapsed" IsReadOnly="True" Binding="{Binding ID, Mode=OneWay}" />
+                            <DataGridTextColumn Header="ФИО" x:Name="CustomerRealNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding RealName, Mode=OneWay}" />
+                            <DataGridTextColumn Header="Ник" x:Name="CustomerNickNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding NickName, Mode=OneWay}" />
+                            <DataGridTextColumn Header="Роль" x:Name="CustomerRoleColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding UserType.Name, Mode=OneWay}" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
                 <StackPanel Margin="0,10,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="64"/>
-                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="64" />
+                            <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="250"/>
+                            <RowDefinition Height="250" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Grid.Column="0">
                             <StackPanel Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -58,10 +58,10 @@
                             </StackPanel>
                             <DataGrid x:Name="SelectedProductsDataGrid" Height="250" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID" x:Name="SelectedProductRealNameColumn" Visibility="Collapsed" Width="1.8*" IsReadOnly="True" Binding="{Binding ID, Mode=TwoWay}"/>
-                                    <DataGridTextColumn Header="Наименование" x:Name="SelectedProductNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding Name, Mode=TwoWay}"/>
-                                    <DataGridTextColumn Header="Кол-во" x:Name="SelectedProductCountColumn" Width="1*" IsReadOnly="True" Binding="{Binding Count, Mode=TwoWay}"/>
-                                    <DataGridTextColumn Header="Цена" x:Name="SelectedProductPriceColumn" Width="1*" IsReadOnly="True" Binding="{Binding Price, Mode=TwoWay}"/>
+                                    <DataGridTextColumn Header="ID" x:Name="SelectedProductRealNameColumn" Visibility="Collapsed" Width="1.8*" IsReadOnly="True" Binding="{Binding ID, Mode=TwoWay}" />
+                                    <DataGridTextColumn Header="Наименование" x:Name="SelectedProductNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding Name, Mode=TwoWay}" />
+                                    <DataGridTextColumn Header="Кол-во" x:Name="SelectedProductCountColumn" Width="1*" IsReadOnly="True" Binding="{Binding Count, Mode=TwoWay}" />
+                                    <DataGridTextColumn Header="Цена" x:Name="SelectedProductPriceColumn" Width="1*" IsReadOnly="True" Binding="{Binding Price, Mode=TwoWay}" />
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
@@ -84,14 +84,13 @@
                             </StackPanel>
                             <DataGrid x:Name="AvailableProductsDataGrid" Height="250" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID" x:Name="AvailableProductRealNameColumn" Visibility="Collapsed" Width="1.8*" IsReadOnly="True" Binding="{Binding ID, Mode=TwoWay}"/>
-                                    <DataGridTextColumn Header="Наименование" x:Name="AvailableProductNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding Name, Mode=TwoWay}"/>
-                                    <DataGridTextColumn Header="Кол-во" x:Name="AvailableProductCountColumn" Width="1*" IsReadOnly="True" Binding="{Binding Count, Mode=TwoWay}"/>
-                                    <DataGridTextColumn Header="Цена" x:Name="AvailableProductPriceColumn" Width="1*" IsReadOnly="True" Binding="{Binding Price, Mode=TwoWay}"/>
+                                    <DataGridTextColumn Header="ID" x:Name="AvailableProductRealNameColumn" Visibility="Collapsed" Width="1.8*" IsReadOnly="True" Binding="{Binding ID, Mode=TwoWay}" />
+                                    <DataGridTextColumn Header="Наименование" x:Name="AvailableProductNameColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding Name, Mode=TwoWay}" />
+                                    <DataGridTextColumn Header="Кол-во" x:Name="AvailableProductCountColumn" Width="1*" IsReadOnly="True" Binding="{Binding Count, Mode=TwoWay}" />
+                                    <DataGridTextColumn Header="Цена" x:Name="AvailableProductPriceColumn" Width="1*" IsReadOnly="True" Binding="{Binding Price, Mode=TwoWay}" />
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
-                        
                     </Grid>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
@@ -104,21 +103,20 @@
         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
             <StackPanel>
                 <Button x:Name="CreateCustomerButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="CreateCustomerButton_Click">
-                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
-                        Создать <LineBreak/> покупателя
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center">
+                        Создать <LineBreak /> покупателя
                     </TextBlock>
                 </Button>
                 <Button x:Name="SaveExitButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="SaveExitButton_Click">
-                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
-                        Сохранить <LineBreak/> и выйти
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center">
+                        Сохранить <LineBreak /> и выйти
                     </TextBlock>
                 </Button>
                 <Button x:Name="ExitButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="ExitButton_Click">
-                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
-                        Выйти без <LineBreak/> сохранения
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center">
+                        Выйти без <LineBreak /> сохранения
                     </TextBlock>
                 </Button>
-
             </StackPanel>
         </StackPanel>
     </Grid>

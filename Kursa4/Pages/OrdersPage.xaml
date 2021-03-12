@@ -1,53 +1,51 @@
 ﻿<local:ConcretePage x:Class="Kursa4.Pages.OrdersPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Kursa4.Pages"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       x:Name="Orders_Page"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Управление заказами">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*" MaxWidth="230"/>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" MaxWidth="230" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <ScrollViewer Background="{StaticResource BackgroundImageBrush}" Grid.Column="0" Grid.Row="0">
             <StackPanel Margin="20">
                 <StackPanel>
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
                         <TextBlock VerticalAlignment="Center">Поиск по дате:</TextBlock>
-                        <DatePicker Margin="5,0,0,0" Name="StartDatePicker" CalendarClosed="StartDatePicker_CalendarClosed"/>
+                        <DatePicker Margin="5,0,0,0" Name="StartDatePicker" CalendarClosed="StartDatePicker_CalendarClosed" />
                         <TextBlock VerticalAlignment="Center" Margin="5,0,0,0">-</TextBlock>
-                        <DatePicker Margin="5,0,0,0" Name="EndDatePicker" CalendarClosed="StartDatePicker_CalendarClosed"/>
+                        <DatePicker Margin="5,0,0,0" Name="EndDatePicker" CalendarClosed="StartDatePicker_CalendarClosed" />
                     </StackPanel>
                     <StackPanel Margin="0,10,0,0">
                         <DataGrid x:Name="OrdersDataGrid" Height="250" AutoGenerateColumns="False" CanUserAddRows="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" x:Name="OrderIDColumn" Visibility="Collapsed" IsReadOnly="True" Binding="{Binding ID, Mode=TwoWay}"/>
-                                <!--<DataGridTextColumn Header="Покупатель" x:Name="OrderCustomerColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding User.Name, Mode=TwoWay}"/>
-                                <DataGridTextColumn Header="Продавец" x:Name="OrderMerchantColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding User1.Name, Mode=TwoWay}"/>-->
-                                <DataGridTextColumn Header="Дата создания" x:Name="OrderCreatedAtColumn" Width="1.5*" Binding="{Binding CreatedAt, Mode=TwoWay}"/>
-                                <DataGridTextColumn Header="Дедлайн" x:Name="OrderDeadlineAtColumn" Width="1.5*" Binding="{Binding DeadlineAt, Mode=TwoWay}"/>
-                                <!--<DataGridTextColumn Header="Статус" x:Name="OrderStatusColumn" Width="0.6*" IsReadOnly="True" Binding="{Binding OrderStatu.Name, Mode=OneWay}"/>-->
+                                <DataGridTextColumn Header="ID" x:Name="OrderIDColumn" Visibility="Collapsed" IsReadOnly="True" Binding="{Binding ID, Mode=TwoWay}" />
+                                <!--<DataGridTextColumn Header="Покупатель" x:Name="OrderCustomerColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding User.Name, Mode=TwoWay}" />
+                                <DataGridTextColumn Header="Продавец" x:Name="OrderMerchantColumn" Width="1.8*" IsReadOnly="True" Binding="{Binding User1.Name, Mode=TwoWay}" />-->
+                                <DataGridTextColumn Header="Дата создания" x:Name="OrderCreatedAtColumn" Width="1.5*" Binding="{Binding CreatedAt, Mode=TwoWay}" />
+                                <DataGridTextColumn Header="Дедлайн" x:Name="OrderDeadlineAtColumn" Width="1.5*" Binding="{Binding DeadlineAt, Mode=TwoWay}" />
+                                <!--<DataGridTextColumn Header="Статус" x:Name="OrderStatusColumn" Width="0.6*" IsReadOnly="True" Binding="{Binding OrderStatu.Name, Mode=OneWay}" />-->
                                 <DataGridTemplateColumn Header="Статус" x:Name="OrderChangeStatusColumn" Width="0.8*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Click="ChangeStatusButton_Click" Content="{Binding OrderStatu.Name, Mode=OneWay}"/>
+                                            <Button Click="ChangeStatusButton_Click" Content="{Binding OrderStatu.Name, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </StackPanel>
-                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal" >
-                        
-
+                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -56,16 +54,15 @@
         <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
             <StackPanel>
                 <Button x:Name="OrderInfoButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="OrderInfoButton_Click">
-                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
-                        Детали <LineBreak/> заказа
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center">
+                        Детали <LineBreak /> заказа
                     </TextBlock>
                 </Button>
                 <Button x:Name="MakeOrderButton" Width="200" Height="100" Margin="0,12.5,0,12.5" Click="MakeOrderButton_Click">
-                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center"  >
-                        Новый <LineBreak/> заказ
+                    <TextBlock FontSize="28" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center">
+                        Новый <LineBreak /> заказ
                     </TextBlock>
                 </Button>
-
             </StackPanel>
         </StackPanel>
     </Grid>

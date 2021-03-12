@@ -1,13 +1,7 @@
-﻿using iText.IO.Font;
-using iText.IO.Font.Constants;
-using iText.Kernel;
-using iText.Kernel.Font;
-using iText.Kernel.Pdf;
-using iText.Kernel.Pdf.Canvas.Draw;
+﻿using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using Kursa4.Entitities;
-using Kursa4.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,8 +19,10 @@ namespace Kursa4.Windows
     {
         private const int GWL_STYLE = -16;
         private const int WS_SYSMENU = 0x80000;
+
         [DllImport("user32.dll", SetLastError = true)]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
@@ -34,6 +30,7 @@ namespace Kursa4.Windows
         public User CurrentMerchant { get; set; }
         public Order CurrentOrder { get; set; }
         public List<SelectedProduct> SelectedProducts { get; set; }
+
         public OrderDetailsWindow(long orderID)
         {
             InitializeComponent();
@@ -62,15 +59,12 @@ namespace Kursa4.Windows
             ReloadTotal();
 
             DeadlineAtField.SelectedDate = CurrentOrder.DeadlineAt;
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var hwnd = new WindowInteropHelper(this).Handle;
             SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
-
-
         }
 
         private void ReloadSelectedProducts()
@@ -133,7 +127,6 @@ namespace Kursa4.Windows
                     continue;
                 }
 
-
                 SelectedProducts.Add(new SelectedProduct(
                     currentProduct.ID,
                     currentProduct.Name,
@@ -146,7 +139,6 @@ namespace Kursa4.Windows
                 ReloadSelectedProducts();
                 ReloadAvailableProducts();
                 ReloadTotal();
-
             }
         }
 
@@ -249,7 +241,8 @@ namespace Kursa4.Windows
             sfd.RestoreDirectory = true;
 
             System.Windows.Forms.DialogResult result = sfd.ShowDialog();
-            if (!result.Equals(System.Windows.Forms.DialogResult.OK)){
+            if (!result.Equals(System.Windows.Forms.DialogResult.OK))
+            {
                 return;
             }
 
@@ -274,8 +267,6 @@ namespace Kursa4.Windows
                 return;
             }
 
-          
-
             Document document = new Document(pdfDoc);
 
             document.SetFont(App.GetDefaultPdfFont());
@@ -285,13 +276,13 @@ namespace Kursa4.Windows
                 .SetFontSize(20)
             );
 
-            document.Add(new Paragraph("#"+CurrentOrder.ID)
+            document.Add(new Paragraph("#" + CurrentOrder.ID)
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
                 .SetFontSize(15)
             );
 
             document.Add(new Paragraph("Дата создания: " + CurrentOrder.CreatedAt.Value.ToString())
-                .SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT)             
+                .SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT)
             );
             if (CurrentOrder.DeadlineAt.HasValue)
             {
@@ -299,8 +290,6 @@ namespace Kursa4.Windows
                     .SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT)
                 );
             }
-
-            
 
             Table users = new Table(2, true);
             document.Add(users);
@@ -312,10 +301,7 @@ namespace Kursa4.Windows
             //users.Flush();
             users.Complete();
 
-
-
             document.Add(new Paragraph());
-
 
             Table products = new Table(4, true);
             document.Add(products);
@@ -341,7 +327,7 @@ namespace Kursa4.Windows
                                                 select op).ToList();
             decimal total = 0;
 
-            foreach(OrderProduct op in orderProducts)
+            foreach (OrderProduct op in orderProducts)
             {
                 products.AddCell(new Cell(1, 1)
                     .SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT)
@@ -357,17 +343,16 @@ namespace Kursa4.Windows
                 );
                 products.AddCell(new Cell(1, 1)
                     .SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT)
-                    .Add(new Paragraph((op.Product1.Price*op.Count).ToString()))
+                    .Add(new Paragraph((op.Product1.Price * op.Count).ToString()))
                 );
                 products.Flush();
                 total += op.Product1.Price * op.Count;
             }
 
-            
             //products.Flush();
             products.Complete();
-            
-            document.Add(new Paragraph("Итого: " + total.ToString()+ " руб.")
+
+            document.Add(new Paragraph("Итого: " + total.ToString() + " руб.")
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.RIGHT)
                 .SetFontSize(15)
                 .SetBold()

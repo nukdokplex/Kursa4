@@ -1,19 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Kursa4.Windows
 {
@@ -22,13 +12,15 @@ namespace Kursa4.Windows
     /// </summary>
     public partial class DbConfiguratorWindow : Window
     {
-        
         private const int GWL_STYLE = -16;
         private const int WS_SYSMENU = 0x80000;
+
         [DllImport("user32.dll", SetLastError = true)]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
         public string ConnectionString;
 
         public DbConfiguratorWindow(string? connectionString)
@@ -62,7 +54,6 @@ namespace Kursa4.Windows
                 }
                 if (stringBuilder.DataSource.Split(@",".ToCharArray()).Length == 2)
                 {
-
                     TCPPortField.Text = stringBuilder.DataSource.Split(@",".ToCharArray())[1];
                 }
 
@@ -88,8 +79,6 @@ namespace Kursa4.Windows
                     UserNameField.Text = stringBuilder.UserID;
                     PasswordField.Text = stringBuilder.Password;
                 }
-
-
             }
         }
 
@@ -142,7 +131,7 @@ namespace Kursa4.Windows
                 stringBuilder.Password = PasswordField.Text;
             }
             stringBuilder.MultipleActiveResultSets = true;
-            
+
             ConnectionString = stringBuilder.ToString();
             this.Close();
         }
