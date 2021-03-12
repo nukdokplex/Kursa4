@@ -1,4 +1,5 @@
 ﻿using Kursa4.Entitities;
+using Kursa4.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +50,27 @@ namespace Kursa4.Pages
                 RemoveLastBackEntry = false;
             }
             //MessageBox.Show(CurrentUser.RealName);
+
+            var elements = MenuContainer.Children;
+
+            foreach (UIElement element in elements)
+            {
+                Button button = element as Button;
+                List<long> allowedUserTypes = new List<long>();
+                string[] tags = (button.Tag as string).Split(new[] { ',' });
+                foreach (string tag in tags)
+                {
+                    if (string.IsNullOrEmpty(tag))
+                        continue;
+                    allowedUserTypes.Add(long.Parse(tag));
+                }
+
+                if (!allowedUserTypes.Contains(CurrentUser.Type))
+                {
+                    button.IsEnabled = false;
+                    //button.Visibility = Visibility.Collapsed;
+                }
+            }
         }
 
         private void GoToOrdersButton_Click(object sender, RoutedEventArgs e)
@@ -67,6 +89,17 @@ namespace Kursa4.Pages
                 productsPage = new ProductsPage();
             }
             NavigationService.Navigate(productsPage);
+        }
+
+        private void GoToReportsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void GoToCreateCustomerWindow_Click(object sender, RoutedEventArgs e)
+        {
+            CreateCustomerWindow createCustomerWindow = new CreateCustomerWindow();
+            createCustomerWindow.ShowDialog();
         }
     }
 }

@@ -38,6 +38,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Images\icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\packages\Portable.BouncyCastle.1.8.9\lib\net40\BouncyCastle.Crypto.dll</HintPath>
@@ -207,6 +210,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Entitities\SelectedProduct.cs" />
+    <Compile Include="Pages\ReportsPage.xaml.cs">
+      <DependentUpon>ReportsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Windows\ChangeOrderStatusWindow.xaml.cs">
       <DependentUpon>ChangeOrderStatusWindow.xaml</DependentUpon>
@@ -269,6 +275,10 @@
     <Compile Include="Windows\OrderDetailsWindow.xaml.cs">
       <DependentUpon>OrderDetailsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\ReportsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ChangeOrderStatusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -410,6 +420,7 @@
       <DependentUpon>DataModel.edmx</DependentUpon>
       <LastGenOutput>DataModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Images\icon.ico" />
     <Resource Include="Resources\Fonts\FontList.txt" />
   </ItemGroup>
   <ItemGroup />

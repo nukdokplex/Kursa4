@@ -5,6 +5,7 @@ using iText.Layout.Element;
 using Kursa4.Entitities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -133,10 +134,31 @@ namespace Kursa4.Pages
             {
                 return;
             }
-            PdfWriter writer = new PdfWriter(sfd.FileName);
-            PdfDocument pdf = new PdfDocument(writer);
-            Document document = new Document(pdf);
 
+            if (File.Exists(sfd.FileName))
+            {
+                File.Delete(sfd.FileName);
+            }
+
+            PdfDocument pdfDoc;
+            try
+            {
+                pdfDoc = new PdfDocument(new PdfWriter(sfd.FileName));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(
+                    $"При попытке закрытия документа произошла ошибка: \"{exception.Message}\". Невозможно установить причину возникновения этой ошибки.",
+                    "Ошибка!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+                return;
+            }
+
+
+
+            Document document = new Document(pdfDoc);
 
             document.SetFont(App.DefaultPdfFont);
 
@@ -148,54 +170,70 @@ namespace Kursa4.Pages
             document.Add(new Paragraph($"на {DateTime.Now.ToString()}")
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
                 .SetFontSize(15)
-            ); 
+            );
+
+            document.Add(new Paragraph());
 
 
-            LineSeparator ls = new LineSeparator(new SolidLine());
-            document.Add(ls);
-
-           
-
-            Table products = new Table(3, true);
-
+            Table products = new Table(4, true);
+            document.Add(products);
+            products.AddHeaderCell(new Cell(1, 1)
+                .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
+                .Add(new Paragraph("ID"))
+            );
             products.AddHeaderCell(new Cell(1, 1)
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
                 .Add(new Paragraph("Наименование"))
             );
             products.AddHeaderCell(new Cell(1, 1)
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
-                .Add(new Paragraph("Количество"))
+                .Add(new Paragraph("Цена"))
             );
             products.AddHeaderCell(new Cell(1, 1)
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
-                .Add(new Paragraph("Цена"))
+                .Add(new Paragraph("Количество"))
             );
-           
+            products.Flush();
+            List<Product> productsList = (from product in App.DB.Products
+                                          select product).ToList();
 
-            List<Product> productList= (from product in App.DB.Products
-                                                select product).ToList();
-            decimal total = 0;
-
-            foreach (Product product in productList)
+            foreach (Product product in productsList)
             {
+                products.AddCell(new Cell(1, 1)
+                    .SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT)
+                    .Add(new Paragraph($"#{product.ID.ToString()}"))
+                );
                 products.AddCell(new Cell(1, 1)
                     .SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT)
                     .Add(new Paragraph(product.Name))
                 );
                 products.AddCell(new Cell(1, 1)
                     .SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT)
-                    .Add(new Paragraph(product.Count.ToString()))
+                    .Add(new Paragraph($"{product.Price} руб."))
                 );
                 products.AddCell(new Cell(1, 1)
                     .SetTextAlignment(iText.Layout.Properties.TextAlignment.LEFT)
-                    .Add(new Paragraph(product.Price.ToString() + " руб."))
+                    .Add(new Paragraph($"{product.Count} шт."))
                 );
-                
-
+                products.Flush();
             }
-            document.Add(products);
-           
-            document.Close();
+
+            products.Complete();
+
+            try
+            {
+                document.Close();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(
+                    $"При попытке закрытия документа произошла ошибка: \"{exception.Message}\". Невозможно установить причину возникновения этой ошибки.",
+                    "Ошибка!",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+                return;
+            }
         }
     }
 }

@@ -79,7 +79,7 @@ namespace Kursa4.Windows
             customer.Password = string.IsNullOrWhiteSpace(PasswordField.Text) ? null : PasswordField.Text;
             customer.EMail = string.IsNullOrWhiteSpace(EMailField.Text) ? null : EMailField.Text;
             customer.Phone = string.IsNullOrWhiteSpace(PhoneField.Text) ? null : PhoneField.Text;
-            customer.Type = 3;
+            customer.Type = 4;
 
             App.DB.Users.Add(customer);
             App.DB.SaveChanges();
