@@ -26,6 +26,7 @@ namespace Kursa4.Pages
 
         public ProductsPage? productsPage = null;
         public OrdersPage? ordersPage = null;
+        public ReportsPage? reportsPage = null;
         
         public User CurrentUser {
             get;
@@ -93,7 +94,12 @@ namespace Kursa4.Pages
 
         private void GoToReportsButton_Click(object sender, RoutedEventArgs e)
         {
+            if (reportsPage == null)
+            {
+                reportsPage = new ReportsPage();
+            }
 
+            this.NavigationService.Navigate(reportsPage);
         }
 
         private void GoToCreateCustomerWindow_Click(object sender, RoutedEventArgs e)

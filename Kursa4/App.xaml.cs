@@ -24,22 +24,20 @@ namespace Kursa4
     {
         public static Entitities.dbConnection DB;
         public static User? CurrentUser;
-        public static PdfFont DefaultPdfFont;
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            InitializeiTextFonts();
             base.OnStartup(e);
             DB = new dbConnection();
 
         }
 
-        protected void InitializeiTextFonts()
+        public static PdfFont GetDefaultPdfFont()
         {
             byte[] fontContents = Static.ReadStreamFully(Static.GetResourceStream(new Uri("/Resources/Fonts/Roboto-Regular.ttf", UriKind.Relative)));
 
             var fontProgram = FontProgramFactory.CreateFont(fontContents);
-            DefaultPdfFont = PdfFontFactory.CreateFont(fontProgram, PdfEncodings.IDENTITY_H);
+            return PdfFontFactory.CreateFont(fontProgram, PdfEncodings.IDENTITY_H);
         }
 
         protected override void OnExit(ExitEventArgs e)

@@ -160,7 +160,7 @@ namespace Kursa4.Pages
 
             Document document = new Document(pdfDoc);
 
-            document.SetFont(App.DefaultPdfFont);
+            document.SetFont(App.GetDefaultPdfFont());
 
             document.Add(new Paragraph("Список товаров")
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)

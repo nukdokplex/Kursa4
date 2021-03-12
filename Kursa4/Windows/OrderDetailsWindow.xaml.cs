@@ -278,7 +278,7 @@ namespace Kursa4.Windows
 
             Document document = new Document(pdfDoc);
 
-            document.SetFont(App.DefaultPdfFont);
+            document.SetFont(App.GetDefaultPdfFont());
 
             document.Add(new Paragraph("ЗАКАЗ")
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER)
