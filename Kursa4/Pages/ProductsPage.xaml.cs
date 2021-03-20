@@ -95,7 +95,19 @@ namespace Kursa4.Pages
             if (result == MessageBoxResult.Yes)
             {
                 App.DB.Products.Remove(product);
-                App.DB.SaveChanges();
+                try
+                {
+                    App.DB.SaveChanges();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(
+                        $"Произошла ошибка во время удаления: {exception.Message} Обычно, эта ошибка связана с тем, что данный товар был использован в другом заказе, при этом удаление этой записи является нарушением целостности, поэтому было вызвано исключение, предотвращающее это. В данном случае, удаление этой записи невозможно.",
+                        "Ошибка удаления",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                        );
+                }
                 ReloadProducts();
             }
         }
