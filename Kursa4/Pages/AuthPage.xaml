@@ -35,7 +35,7 @@
                         <PasswordBox Name="PasswordField" Width="175" Password="12345678" />
                         <TextBox Name="PasswordFieldUnmasked" Width="175" Visibility="Collapsed" Text="12345678" />
                         <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
-                            <CheckBox IsChecked="False" Name="ShowPassword" Content="Показать пароль" Checked="ShowPassword_Checked" />
+                            <CheckBox IsChecked="False" Name="ShowPassword" Content="Показать пароль" Click="ShowPassword_Checked" />
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>

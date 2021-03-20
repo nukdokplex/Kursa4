@@ -58,13 +58,13 @@ namespace Kursa4.Pages
                 return;
             }
 
-            /*MessageBox
+           MessageBox
                 .Show(
                     "Успешный вход!",
                     "Успех!",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information
-                );*/
+                );
 
             NavigationService.Navigate(new StartPage(true));
             NavigationService.RemoveBackEntry();

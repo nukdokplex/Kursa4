@@ -15,6 +15,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="60" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="BackButton" Height="60" Width="60">
@@ -26,6 +27,13 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Margin="20,0,0,0">
             <TextBlock x:Name="TitleTextBlock" FontSize="24">
             </TextBlock>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2" Grid.Row="0">
+            <Button x:Name="OpenHelpButton" Click="OpenHelpButton_Click">
+                <TextBlock Margin="10,0">
+                    Справка
+                </TextBlock>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

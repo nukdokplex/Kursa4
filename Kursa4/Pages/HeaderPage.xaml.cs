@@ -42,5 +42,10 @@ namespace Kursa4.Pages
                 ControllingFrame.GoBack();
             }
         }
+
+        private void OpenHelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://kursa4.nukdotcom.ru/");
+        }
     }
 }

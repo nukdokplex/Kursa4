@@ -8,7 +8,7 @@ using System.Windows;
 [assembly: AssemblyTitle("Kursa4")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("NukDokPlex")]
 [assembly: AssemblyProduct("Kursa4")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
