@@ -1,5 +1,11 @@
 ﻿using Kursa4.Pages;
+using Kursa4.Utils;
+using System;
+using System.IO;
+using System.Media;
+using System.Reflection;
 using System.Windows;
+using System.Windows.Media;
 
 namespace Kursa4
 {
@@ -26,6 +32,9 @@ namespace Kursa4
 
             //Content
             ContentFrame.Navigate(new AuthPage());
+
+            
         }
+
     }
 }
